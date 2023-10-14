@@ -38,7 +38,7 @@ const Implementation = () => {
           ))}
         </GridContent>
       </SortableContext>
-      <DragOverlay adjustScale={true}>
+      <DragOverlay adjustScale style={{ transformOrigin: "0 0 " }}>
         {activeId ? <CardItem {...getDataCardOverlay(activeId)} /> : null}
       </DragOverlay>
     </DndContext>
