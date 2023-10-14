@@ -1,8 +1,8 @@
-import { Ref, forwardRef } from "react";
+import { Ref, forwardRef, memo } from "react";
 
 import { CardItemProps } from "../../interfaces";
 
-export const CardItem = forwardRef(
+const CardItem = forwardRef(
   (Props: CardItemProps, ref: Ref<HTMLDivElement>) => {
     // Cuando utilizas forwardRef, puedes pasar la ref a un componente secundario y el componente padre podrá acceder directamente a los métodos del DOM del componente hijo.
 
@@ -24,9 +24,11 @@ export const CardItem = forwardRef(
           <p className="text-gray-600 text-sm">{Props.description}</p>
         </div>
         <button className="bg-blue-500 mb-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg mx-auto w-32">
-          Mi Botón
+          Tocame
         </button>
       </div>
     );
   }
 );
+
+export default memo(CardItem);

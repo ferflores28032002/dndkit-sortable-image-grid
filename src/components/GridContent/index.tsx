@@ -1,6 +1,8 @@
+import { memo } from "react";
+
 import { GridContentProps } from "../../interfaces/GridContent.interface";
 
-export function GridContent({ children, ...rest }: GridContentProps) {
+const GridContent = ({ children, ...rest }: GridContentProps) => {
   return (
     <div
       style={{
@@ -23,4 +25,6 @@ export function GridContent({ children, ...rest }: GridContentProps) {
       </style>
     </div>
   );
-}
+};
+
+export default memo(GridContent);

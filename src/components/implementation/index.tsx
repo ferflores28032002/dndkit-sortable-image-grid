@@ -4,8 +4,8 @@ import { DndContext, DragOverlay, closestCenter } from "@dnd-kit/core";
 
 import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
 
-import { GridContent } from "../GridContent";
-import { CardItem } from "../GridItem";
+import GridContent from "../GridContent";
+import CardItem from "../GridItem";
 import { SortableCardItem } from "../sortableCardItem";
 import { useGridContentActions } from "../../hooks/useGridContentActions";
 

@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DragEndEvent,
+  DragStartEvent,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -14,8 +21,9 @@ export const useGridContentActions = <T extends Identifiable>(
 
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
-  function handleDragEnd(event: any) {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+    if (!over) return;
 
     if (active.id !== over.id) {
       setItems((items) => {
@@ -25,16 +33,21 @@ export const useGridContentActions = <T extends Identifiable>(
         return arrayMove(items, oldIndex, newIndex);
       });
     }
-    setActiveId(null);
-  }
+    handleDragCancel();
+  };
 
-  function handleDragStart(event: any) {
-    setActiveId(event.active.id);
-  }
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    const foundItem = items.find((item) => item.id === active.id);
 
-  function handleDragCancel() {
+    if (foundItem) {
+      setActiveId(foundItem.id);
+    }
+  };
+
+  const handleDragCancel = () => {
     setActiveId(null);
-  }
+  };
 
   const getDataCardOverlay = (id: string): T => {
     return items.find((item) => item.id === id) || ({} as T);
